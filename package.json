@@ -1,14 +1,14 @@
 {
-  "name": "react-hot-boilerplate",
-  "version": "1.0.0",
-  "description": "Boilerplate for ReactJS project with hot code reloading",
+  "name": "TodoFromZero",
+  "version": "0.0.0",
+  "description": "Todo app writen in react with flux architecture",
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
+    "url": "https://github.com/lidorcg/TodoFromZero.git"
   },
   "keywords": [
     "react",
