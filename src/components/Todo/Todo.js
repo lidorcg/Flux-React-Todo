@@ -10,9 +10,9 @@ export default class Todo extends Component {
 
     state = {editing: false};
 
-    render() {
+    render = () => {
         return (this.state.editing ? this._renderInput() : this._renderTodo());
-    }
+    };
 
     _renderTodo = () => {
         return (
@@ -28,7 +28,7 @@ export default class Todo extends Component {
     _renderInput = () => {
         return (
             <div className="todo-item">
-                <TodoInput val={this.props.todo.text} onBlur={this._onBlur} onFinish={this._onFinish}/>
+                <TodoInput val={this.props.todo.text} onBlur={this._onBlur} onSave={this._onSave}/>
             </div>
 
         );
@@ -38,7 +38,7 @@ export default class Todo extends Component {
         this.setState({editing: true});
     };
 
-    _onFinish = (val) => {
+    _onSave = (val) => {
         TodoActions.update(this.props.todo.id, val);
         this.setState({editing: false});
     };

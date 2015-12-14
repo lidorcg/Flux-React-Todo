@@ -10,25 +10,22 @@ export default class TodoInput extends Component {
     static propTypes = {
         placeHolder: React.PropTypes.string,
         val: React.PropTypes.string,
-        onFinish: React.PropTypes.func.isRequired,
+        onSave: React.PropTypes.func.isRequired,
         onBlur: React.PropTypes.func
     };
 
-    render() {
+    render = () => {
         return (
-            <div className="todo-input">
-                <input className="todo-form"
-                       type="text"
-                       placeholder={this.props.placeHolder || ''}
-                       autoFocus={true}
-                       value={this.state.val}
-                       onChange={this._onChange}
-                       onKeyDown={this._onKeyDown}
-                       onBlur={this.props.onBlur}
-                />
-            </div>
+            <input className="todo-input"
+                   type="text"
+                   placeholder={this.props.placeHolder || ''}
+                   autoFocus={true}
+                   value={this.state.val}
+                   onChange={this._onChange}
+                   onKeyDown={this._onKeyDown}
+                   onBlur={this.props.onBlur}/>
         );
-    }
+    };
 
     _onChange = (e) => {
         this.setState({val: e.target.value});
@@ -36,7 +33,7 @@ export default class TodoInput extends Component {
 
     _onKeyDown = (e) => {
         if (e.keyCode === 13) {
-            this.props.onFinish(e.target.value);
+            this.props.onSave(e.target.value);
             this.setState({val: ''});
         }
     }

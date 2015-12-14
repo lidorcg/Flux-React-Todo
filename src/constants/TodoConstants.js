@@ -1,7 +1,6 @@
 export default {
+    VIEW_ACTION: "VIEW_ACTION",
     CREATE: "CREATE",
-    READ: "READ",
     UPDATE: "UPDATE",
-    DESTROY: "DESTROY",
-    CHANGE: "CHANGE"
+    DESTROY: "DESTROY"
 };

@@ -4,15 +4,15 @@ import TodoInput from '../TodoInput/TodoInput'
 
 export default class TodoForm extends Component {
 
-    render() {
+    render = () => {
         return (
             <div className="todo-form">
-                <TodoInput placeHolder="What's next?" onFinish={this._onFinish}/>
+                <TodoInput placeHolder="What's next?" onSave={this._onSave}/>
             </div>
         );
-    }
+    };
 
-    _onFinish = (val) => {
+    _onSave = (val) => {
         TodoActions.create(val);
     }
 

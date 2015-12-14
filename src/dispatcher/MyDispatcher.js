@@ -1,19 +1,22 @@
+import TodoConstants from '../constants/TodoConstants';
+
+var _callbacks = [];
+
 export default {
 
-    callbacks: {},
-
-    register: function (callback, actionType) {
-        if (!this.callbacks[actionType]) {
-            this.callbacks[actionType] = [];
-        }
-        this.callbacks[actionType].push(callback);
+    register: function (callback) {
+        _callbacks.push(callback);
+        return _callbacks.length - 1;
     },
 
-    update: function (actionTypes) {
-        actionTypes.forEach(aT => {
-            if (this.callbacks[aT]) {
-                this.callbacks[aT].forEach(c => c());
-            }
+    dispatch: function (payload) {
+        _callbacks.forEach(c => c(payload));
+    },
+
+    handleViewAction: function (action) {
+        this.dispatch({
+            source: TodoConstants.VIEW_ACTION,
+            action: action
         });
     }
 

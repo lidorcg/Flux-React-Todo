@@ -1,25 +1,26 @@
-import TodoStore from '../stores/TodoStore';
 import TodoConstants from '../constants/TodoConstants';
 import Dispatcher from '../dispatcher/MyDispatcher';
 
 export default {
     create: function (text) {
-        TodoStore.create(text);
-        Dispatcher.update([TodoConstants.CREATE, TodoConstants.CHANGE]);
-    },
-
-    getAll: function () {
-        Dispatcher.update([TodoConstants.READ]);
-        return TodoStore.getAll();
+        Dispatcher.handleViewAction({
+            actionType: TodoConstants.CREATE,
+            text: text
+        });
     },
 
     update: function (id, text) {
-        TodoStore.update(id, text);
-        Dispatcher.update([TodoConstants.UPDATE, TodoConstants.CHANGE]);
+        Dispatcher.handleViewAction({
+            actionType: TodoConstants.UPDATE,
+            id: id,
+            text: text
+        });
     },
 
     destroy: function (id) {
-        TodoStore.destroy(id);
-        Dispatcher.update([TodoConstants.DESTROY, TodoConstants.CHANGE]);
+        Dispatcher.handleViewAction({
+            actionType: TodoConstants.DESTROY,
+            id: id
+        });
     }
 };
