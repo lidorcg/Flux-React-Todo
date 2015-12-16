@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import TodoActions from '../../actions/TodoActions'
 import TodoInput from '../TodoInput/TodoInput'
-import ListItem from 'material-ui/lib/lists/list-item'
+
+const ListItem = require('material-ui/lib/lists/list-item');
 const IconButton = require('material-ui/lib/icon-button');
-import DeleteIcon from 'react-material-icons/icons/action/delete';
+const CloseIcon = require('react-material-icons/icons/navigation/close');
 
 export default class Todo extends Component {
 
@@ -29,18 +30,12 @@ export default class Todo extends Component {
     _getDeleteButton = () => {
         return (
             <IconButton onClick={this._destroy}>
-                <DeleteIcon/>
+                <CloseIcon/>
             </IconButton>
         );
     };
 
     _renderInput = () => {
-        return (
-            <ListItem primaryText={this._getTodoInput()}/>
-        );
-    };
-
-    _getTodoInput = () => {
         return (
             <TodoInput val={this.props.todo.text}
                        onBlur={this._onBlur}
@@ -64,4 +59,6 @@ export default class Todo extends Component {
     _destroy = () => {
         TodoActions.destroy(this.props.todo.id);
     }
+
+
 }

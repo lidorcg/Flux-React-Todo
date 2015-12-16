@@ -7,17 +7,15 @@ import Paper from 'material-ui/lib/paper'
 
 export default class TodoBox extends Component {
     _style = {
-        width: 300
+        width: 330
     };
 
     render = () => {
         return (
             <Paper style={this._style}>
-                <List>
-                    <TodoForm/>
-                    <ListDivider/>
-                    <TodoList/>
-                </List>
+                <TodoForm/>
+                <ListDivider/>
+                <TodoList/>
             </Paper>
         );
     }

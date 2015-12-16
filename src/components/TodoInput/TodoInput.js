@@ -15,16 +15,20 @@ export default class TodoInput extends Component {
         onBlur: React.PropTypes.func
     };
 
-
-
+    _style = {
+        paddingLeft: 16
+    };
     render = () => {
         return (
-            <TextField hintText={this.props.placeHolder || ''}
-                       autoFocus={true}
-                       value={this.state.val}
-                       onChange={this._onChange}
-                       onEnterKeyDown={this._onEnterKeyDown}
-                       onBlur={this.props.onBlur}/>
+            <div style={this._style}>
+                <TextField hintText={this.props.placeHolder || ''}
+                           autoFocus={true}
+                           value={this.state.val}
+                           onChange={this._onChange}
+                           onEnterKeyDown={this._onEnterKeyDown}
+                           onBlur={this.props.onBlur}/>
+            </div>
+
         );
     };
 

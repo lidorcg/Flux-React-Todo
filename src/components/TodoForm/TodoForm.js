@@ -4,15 +4,15 @@ import TodoInput from '../TodoInput/TodoInput'
 import ListItem from 'material-ui/lib/lists/list-item'
 
 export default class TodoForm extends Component {
-    render = () => {
-        return (
-            <ListItem primaryText={this._getTodoInput()}/>
-        );
+    _style = {
+        padding: 10
     };
 
-    _getTodoInput = () => {
+    render = () => {
         return (
-            <TodoInput placeHolder="What's next?" onSave={this._onSave}/>
+            <div style={this._style}>
+                <TodoInput placeHolder="What's next?" onSave={this._onSave}/>
+            </div>
         );
     };
 
