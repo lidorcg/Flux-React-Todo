@@ -5,7 +5,8 @@ import ListItem from 'material-ui/lib/lists/list-item'
 
 export default class TodoForm extends Component {
     _style = {
-        padding: 10
+        paddingTop: 4,
+        height: 56
     };
 
     render = () => {

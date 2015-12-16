@@ -4,7 +4,8 @@ import TodoInput from '../TodoInput/TodoInput'
 
 const ListItem = require('material-ui/lib/lists/list-item');
 const IconButton = require('material-ui/lib/icon-button');
-const CloseIcon = require('react-material-icons/icons/navigation/close');
+const Close = require('material-ui/lib/svg-icons/navigation/close');
+const Colors = require('material-ui/lib/styles/colors');
 
 export default class Todo extends Component {
 
@@ -27,11 +28,13 @@ export default class Todo extends Component {
         );
     };
 
+    _deleteButtonStyle = {
+        margin: 12
+    };
+
     _getDeleteButton = () => {
         return (
-            <IconButton onClick={this._destroy}>
-                <CloseIcon/>
-            </IconButton>
+            <Close style={this._deleteButtonStyle} color={Colors.white} hoverColor={Colors.red500} onClick={this._destroy}/>
         );
     };
 
