@@ -3,7 +3,7 @@ import TodoActions from '../../actions/TodoActions'
 import TodoInput from '../TodoInput/TodoInput'
 
 const ListItem = require('material-ui/lib/lists/list-item');
-const IconButton = require('material-ui/lib/icon-button');
+const ListDivider = require('material-ui/lib/lists/list-divider');
 const Close = require('material-ui/lib/svg-icons/navigation/close');
 const Colors = require('material-ui/lib/styles/colors');
 
@@ -21,10 +21,25 @@ export default class Todo extends Component {
 
     _renderTodo = () => {
         return (
-            <ListItem
-                primaryText={this.props.todo.text}
-                onClick={this._onClick}
-                rightIconButton={this._getDeleteButton()}/>
+            <div>
+                <ListItem
+                    primaryText={this._getTodoText()}
+                    onClick={this._onClick}
+                    rightIconButton={this._getDeleteButton()}/>
+                <ListDivider/>
+            </div>
+        );
+    };
+
+    _todoTextStyle = {
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+    };
+
+    _getTodoText = () => {
+        return (
+            <div style={this._todoTextStyle}>{this.props.todo.text}</div>
         );
     };
 
@@ -34,7 +49,8 @@ export default class Todo extends Component {
 
     _getDeleteButton = () => {
         return (
-            <Close style={this._deleteButtonStyle} color={Colors.white} hoverColor={Colors.red500} onClick={this._destroy}/>
+            <Close style={this._deleteButtonStyle} color={Colors.white} hoverColor={Colors.red500}
+                   onClick={this._destroy}/>
         );
     };
 
