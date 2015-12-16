@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import TodoActions from '../../actions/TodoActions'
 import TodoInput from '../TodoInput/TodoInput'
 
+const Checkbox = require('material-ui/lib/checkbox');
+
 export default class Todo extends Component {
 
     static propTypes = {
@@ -14,14 +16,28 @@ export default class Todo extends Component {
         return (this.state.editing ? this._renderInput() : this._renderTodo());
     };
 
+    _style = {
+        fontSize: '15px',
+        boxSizing: 'inherit',
+        listStyleType: 'none',
+        backgroundColor: '#FFF',
+        lineHeight: '1.5rem',
+        padding: '10px 20px',
+        margin: '0px',
+        borderBottom: '1px solid #E0E0E0',
+        minHeight: '84px',
+        paddingLeft: '72px',
+        position: 'relative',
+        color: '#D1D1D1'
+    };
+
     _renderTodo = () => {
         return (
-            <div className="todo-item">
+            <li style={this._style}>
+                <Checkbox/>
+                <span onClick={this._onClick}>{this.props.todo.text}</span>
                 <button onClick={this._destroy}>&#x2718;</button>
-                <li onClick={this._onClick}>
-                    {this.props.todo.text}
-                </li>
-            </div>
+            </li>
         );
     };
 

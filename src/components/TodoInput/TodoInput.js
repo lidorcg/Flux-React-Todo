@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+const TextField = require('material-ui/lib/text-field');
 
 export default class TodoInput extends Component {
 
@@ -16,14 +17,12 @@ export default class TodoInput extends Component {
 
     render = () => {
         return (
-            <input className="todo-input"
-                   type="text"
-                   placeholder={this.props.placeHolder || ''}
-                   autoFocus={true}
-                   value={this.state.val}
-                   onChange={this._onChange}
-                   onKeyDown={this._onKeyDown}
-                   onBlur={this.props.onBlur}/>
+            <TextField floatingLabelText={this.props.placeHolder || ''}
+                       autoFocus={true}
+                       value={this.state.val}
+                       onChange={this._onChange}
+                       onEnterKeyDown={this._onEnterKeyDown}
+                       onBlur={this.props.onBlur}/>
         );
     };
 
@@ -31,10 +30,8 @@ export default class TodoInput extends Component {
         this.setState({val: e.target.value});
     };
 
-    _onKeyDown = (e) => {
-        if (e.keyCode === 13) {
-            this.props.onSave(e.target.value);
-            this.setState({val: ''});
-        }
+    _onEnterKeyDown = (e) => {
+        this.props.onSave(e.target.value);
+        this.setState({val: ''});
     }
 }

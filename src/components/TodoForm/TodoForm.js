@@ -4,9 +4,12 @@ import TodoInput from '../TodoInput/TodoInput'
 
 export default class TodoForm extends Component {
 
+    _style = {
+    };
+
     render = () => {
         return (
-            <div className="todo-form">
+            <div style={this._style}>
                 <TodoInput placeHolder="What's next?" onSave={this._onSave}/>
             </div>
         );

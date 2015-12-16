@@ -16,10 +16,16 @@ export default class TodoList extends Component {
     componentWillUnmount = () => {
         TodoStore.removeCallback(this._updateTodoList);
     };
+    _style = {
+        listStyle: 'none',
+        padding: '0',
+        margin: '0',
+        width: '100%'
+    };
 
     render = () => {
         return (
-            <ul className="todo-list">
+            <ul style={this._style}>
                 {this.state.todoList.map(t => this._renderTodo(t))}
             </ul>
         );
