@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Todo from '../Todo/Todo'
 import TodoStore from '../../stores/TodoStore'
+import List from 'material-ui/lib/lists/list'
 
 export default class TodoList extends Component {
 
@@ -19,9 +20,9 @@ export default class TodoList extends Component {
 
     render = () => {
         return (
-            <ul className="todo-list">
+            <div>
                 {this.state.todoList.map(t => this._renderTodo(t))}
-            </ul>
+            </div>
         );
     };
 
