@@ -19,9 +19,9 @@ export default class TodoList extends Component {
 
     render = () => {
         return (
-            <ul className="todo-list">
+            <div>
                 {this.state.todoList.map(t => this._renderTodo(t))}
-            </ul>
+            </div>
         );
     };
 

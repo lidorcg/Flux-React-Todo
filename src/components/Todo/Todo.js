@@ -11,17 +11,19 @@ export default class Todo extends Component {
     state = {editing: false};
 
     render = () => {
-        return (this.state.editing ? this._renderInput() : this._renderTodo());
+        return (
+            this.state.editing ? this._renderInput() : this._renderTodo()
+        );
     };
 
     _renderTodo = () => {
         return (
-            <div className="todo-item">
-                <button onClick={this._destroy}>&#x2718;</button>
-                <li onClick={this._onClick}>
-                    {this.props.todo.text}
-                </li>
-            </div>
+            <li className="collection-item">
+                <span onClick={this._onClick}>{this.props.todo.text}</span>
+                <i style={{float:'right', cursor: 'pointer'}}
+                   onClick={this._destroy}
+                   className="tiny material-icons">close</i>
+            </li>
         );
     };
 
