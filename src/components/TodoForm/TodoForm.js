@@ -5,6 +5,7 @@ import TodoInput from '../TodoInput/TodoInput'
 export default class TodoForm extends Component {
 
     _style = {
+        borderBottom: '1px solid #E0E0E0'
     };
 
     render = () => {

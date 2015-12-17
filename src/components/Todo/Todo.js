@@ -17,24 +17,20 @@ export default class Todo extends Component {
     };
 
     _style = {
-        fontSize: '15px',
-        boxSizing: 'inherit',
+        height: '48px',
         listStyleType: 'none',
-        backgroundColor: '#FFF',
-        lineHeight: '1.5rem',
-        padding: '10px 20px',
         margin: '0px',
         borderBottom: '1px solid #E0E0E0',
-        minHeight: '84px',
-        paddingLeft: '72px',
-        position: 'relative',
-        color: '#D1D1D1'
+        display: 'table',
+        width: '100%',
+        tableLayout: 'fixed',
+        borderSpacing: '10px'
     };
 
     _renderTodo = () => {
         return (
             <li style={this._style}>
-                <Checkbox/>
+                <input type="checkbox"/>
                 <span onClick={this._onClick}>{this.props.todo.text}</span>
                 <button onClick={this._destroy}>&#x2718;</button>
             </li>
