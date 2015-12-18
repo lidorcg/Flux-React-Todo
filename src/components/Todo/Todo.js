@@ -11,26 +11,30 @@ export default class Todo extends Component {
     state = {editing: false};
 
     render = () => {
-        return (this.state.editing ? this._renderInput() : this._renderTodo());
+        return (
+            <tr className="todo-item">
+                <td><input type="checkbox"/></td>
+                {this.state.editing ? this._renderInput() : this._renderText()}
+                <td>
+                    <span onClick={this._destroy} className="ptr glyphicon glyphicon-remove"/>
+                </td>
+            </tr>
+        );
     };
 
-    _renderTodo = () => {
+    _renderText = () => {
         return (
-            <div className="todo-item">
-                <button onClick={this._destroy}>&#x2718;</button>
-                <li onClick={this._onClick}>
-                    {this.props.todo.text}
-                </li>
-            </div>
+            <td className="todo-item-text" onClick={this._onClick}>{this.props.todo.text}</td>
         );
     };
 
     _renderInput = () => {
         return (
-            <div className="todo-item">
-                <TodoInput val={this.props.todo.text} onBlur={this._onBlur} onSave={this._onSave}/>
-            </div>
-
+            <td className="td-input">
+                <TodoInput val={this.props.todo.text}
+                           onBlur={this._onBlur}
+                           onSave={this._onSave}/>
+            </td>
         );
     };
 

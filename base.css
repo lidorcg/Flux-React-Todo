@@ -4,4 +4,48 @@ body {
 
 .todo-box {
     width: 330px;
+    margin: 10px;
+}
+
+.todo-item {
+    height: 60px;
+}
+
+.table > tbody > tr.todo-item > td {
+    vertical-align: middle
+}
+
+.ptr {
+    cursor: pointer;
+}
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+tr td:first-child {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 15%;
+}
+
+tr td:nth-child(2) {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 70%;
+}
+
+tr td:last-child {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 15%;
+}
+
+.todo-item-text {
+    padding-left: 20px;
+}
+
+.table > tbody > tr.todo-item > td.todo-item-text {
+    padding-left: 20px;
 }
