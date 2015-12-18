@@ -16,7 +16,7 @@ export default class TodoInput extends Component {
 
     render = () => {
         return (
-            <input className="todo-input"
+            <input className="form-control"
                    type="text"
                    placeholder={this.props.placeHolder || ''}
                    autoFocus={true}
