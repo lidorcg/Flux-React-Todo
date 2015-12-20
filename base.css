@@ -7,16 +7,16 @@ body {
     margin: 10px;
 }
 
+.todo-form {
+    padding: 10px;
+}
+
 .todo-item {
-    height: 60px;
+    height: 52px;
 }
 
 .table > tbody > tr.todo-item > td {
     vertical-align: middle
-}
-
-.ptr {
-    cursor: pointer;
 }
 
 table {
@@ -42,4 +42,13 @@ tr td:last-child {
 
 .table > tbody > tr.todo-item > td.todo-item-text {
     padding-left: 20px;
+}
+
+.destroy-btn{
+    cursor: pointer;
+    color: white;
+}
+
+.destroy-btn:hover{
+    color: #F22613;
 }

@@ -4,11 +4,10 @@ export default class TodoInput extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {val: this.props.val || ''}
+        this.state = {val: this.props.val}
     }
 
     static propTypes = {
-        placeHolder: React.PropTypes.string,
         val: React.PropTypes.string,
         onSave: React.PropTypes.func.isRequired,
         onBlur: React.PropTypes.func
@@ -18,7 +17,6 @@ export default class TodoInput extends Component {
         return (
             <input className="form-control"
                    type="text"
-                   placeholder={this.props.placeHolder || ''}
                    autoFocus={true}
                    value={this.state.val}
                    onChange={this._onChange}
@@ -35,6 +33,9 @@ export default class TodoInput extends Component {
         if (e.keyCode === 13) {
             this.props.onSave(e.target.value);
             this.setState({val: ''});
+        }
+        if (e.keyCode === 27) {
+            this.props.onBlur();
         }
     }
 }

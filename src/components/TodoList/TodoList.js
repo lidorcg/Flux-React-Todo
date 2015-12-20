@@ -9,15 +9,15 @@ export default class TodoList extends Component {
         this.state = {todoList: TodoStore.getAll()};
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         TodoStore.addCallback(this._updateTodoList);
-    };
+    }
 
-    componentWillUnmount = () => {
+    componentWillUnmount() {
         TodoStore.removeCallback(this._updateTodoList);
-    };
+    }
 
-    render = () => {
+    render() {
         return (
             <table className="table table-hover ">
                 <tbody>
@@ -25,7 +25,7 @@ export default class TodoList extends Component {
                 </tbody>
             </table>
         );
-    };
+    }
 
     _renderTodo = (todo) => {
         return (
