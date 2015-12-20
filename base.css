@@ -3,7 +3,7 @@ body {
 }
 
 .todo-box {
-    width: 330px;
+    width: 400px;
     margin: 10px;
 }
 
@@ -27,19 +27,13 @@ table {
 tr td:first-child {
     overflow: hidden;
     white-space: nowrap;
-    width: 15%;
-}
-
-tr td:nth-child(2) {
-    overflow: hidden;
-    white-space: nowrap;
-    width: 70%;
+    width: 40px;
 }
 
 tr td:last-child {
     overflow: hidden;
     white-space: nowrap;
-    width: 15%;
+    width: 40px;
 }
 
 .todo-item-text {

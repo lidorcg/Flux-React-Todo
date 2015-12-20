@@ -9,11 +9,12 @@ export default {
         });
     },
 
-    update: function (id, text) {
+    update: function (id, text, status) {
         Dispatcher.handleViewAction({
             actionType: TodoConstants.UPDATE,
             id: id,
-            text: text
+            text: text,
+            status: status
         });
     },
 

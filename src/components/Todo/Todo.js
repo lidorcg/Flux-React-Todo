@@ -13,10 +13,10 @@ export default class Todo extends Component {
     render = () => {
         return (
             <tr className="todo-item">
-                <td><input type="checkbox"/></td>
+                <td><input type="checkbox" onChange={this.onStatusChange} checked={this.props.todo.status}/></td>
                 {this.state.editing ? this._renderInput() : this._renderText()}
                 <td>
-                    <span onClick={this._destroy} className="ptr glyphicon glyphicon-remove"/>
+                    <span onClick={this._onDestroy} className="ptr glyphicon glyphicon-remove"/>
                 </td>
             </tr>
         );
@@ -32,26 +32,31 @@ export default class Todo extends Component {
         return (
             <td className="td-input">
                 <TodoInput val={this.props.todo.text}
-                           onBlur={this._onBlur}
-                           onSave={this._onSave}/>
+                           onBlur={this._onInputBlur}
+                           onSave={this._onTextChange}/>
             </td>
         );
+    };
+
+
+    onStatusChange = (e) => {
+        TodoActions.update(this.props.todo.id, this.props.todo.text, e.target.checked);
     };
 
     _onClick = () => {
         this.setState({editing: true});
     };
 
-    _onSave = (val) => {
-        TodoActions.update(this.props.todo.id, val);
+    _onTextChange = (val) => {
+        TodoActions.update(this.props.todo.id, val, this.props.todo.done);
         this.setState({editing: false});
     };
 
-    _onBlur = () => {
+    _onInputBlur = () => {
         this.setState({editing: false});
     };
 
-    _destroy = () => {
+    _onDestroy = () => {
         TodoActions.destroy(this.props.todo.id);
     }
 }

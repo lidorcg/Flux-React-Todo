@@ -13,13 +13,15 @@ function create(text) {
     var id = shortid.generate();
     TodoList[id] = {
         id: id,
-        text: text
+        text: text,
+        status: false
     };
     TodoDB.set('TodoStore', TodoList);
 }
 
-function update(id, text) {
+function update(id, text, status) {
     TodoList[id].text = text;
+    TodoList[id].status = status;
     TodoDB.set('TodoStore', TodoList);
 }
 
@@ -83,7 +85,7 @@ var TodoStore = {
                 break;
             case TodoConstants.UPDATE:
                 if (action.text != '') {
-                    update(action.id, action.text);
+                    update(action.id, action.text, action.status);
                     emitChange();
                 }
                 break;
