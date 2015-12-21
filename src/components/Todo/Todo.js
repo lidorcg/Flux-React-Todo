@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import TodoActions from '../../actions/TodoActions'
 import TodoInput from './TodoInput'
-
-const Checkbox = require('material-ui/lib/checkbox');
+import TodoCheckbox from './TodoCheckbox'
 
 export default class Todo extends Component {
 
@@ -16,7 +15,7 @@ export default class Todo extends Component {
         return (
             <tr className="todo-item">
 
-                <td><Checkbox onCheck={this._onStatusChange} defaultChecked={this.props.todo.status}/></td>
+                <td><TodoCheckbox onStatusChange={this._onStatusChange} status={this.props.todo.status}/></td>
                 {this.state.editing ? this._renderInput() : this._renderText()}
                 <td>
                     <span onClick={this._onDestroy} className="destroy-btn glyphicon glyphicon-remove"/>

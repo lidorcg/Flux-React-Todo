@@ -13,7 +13,7 @@ export default class TodoInput extends Component {
         onBlur: React.PropTypes.func
     };
 
-    render = () => {
+    render() {
         return (
             <input className="form-control"
                    type="text"
@@ -23,7 +23,7 @@ export default class TodoInput extends Component {
                    onKeyDown={this._onKeyDown}
                    onBlur={this.props.onBlur}/>
         );
-    };
+    }
 
     _onChange = (e) => {
         this.setState({val: e.target.value});
