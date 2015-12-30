@@ -1,33 +1,73 @@
 import shortid from 'shortid';
 import TodoDB from '../db/TodoDB';
-import TodoConstants from '../constants/TodoConstants';
+import ActionTypes from '../constants/ActionTypes';
 import Dispatcher from '../dispatcher/MyDispatcher'
 
 
-var TodoList = TodoDB.get('TodoStore');
+var todoCollection = TodoDB.get('TodoStore');
+
+function getTodoCollectionCount() {
+    var count = 0;
+    for (var i in todoCollection) {
+        count++;
+    }
+    return count;
+}
+
+function compareTodo(a, b) {
+    if (a.order < b.order)
+        return -1;
+    if (a.order > b.order)
+        return 1;
+    return 0;
+}
+
+function getTodoListByOrder() {
+    var todoList = [];
+    for (var i in todoCollection) {
+        todoList.push(todoCollection[i]);
+    }
+    todoList.sort(compareTodo);
+    return todoList;
+}
 
 /* setters and functions that change data are outside the store!
  * we want to force unidirectional data flow:
  * actions => store => view-controller */
 function create(text) {
     var id = shortid.generate();
-    TodoList[id] = {
+    var order = getTodoCollectionCount();
+    todoCollection[id] = {
         id: id,
+        order: order,
         text: text,
         status: false
     };
-    TodoDB.set('TodoStore', TodoList);
+    TodoDB.set('TodoStore', todoCollection);
 }
 
-function update(id, text, status) {
-    TodoList[id].text = text;
-    TodoList[id].status = status;
-    TodoDB.set('TodoStore', TodoList);
+function update(id, order, text, status) {
+    todoCollection[id].order = order;
+    todoCollection[id].text = text;
+    todoCollection[id].status = status;
+    TodoDB.set('TodoStore', todoCollection);
 }
 
 function destroy(id) {
-    delete TodoList[id];
-    TodoDB.set('TodoStore', TodoList);
+    delete todoCollection[id];
+    TodoDB.set('TodoStore', todoCollection);
+}
+
+function reorder(id, newPlace) {
+    todoCollection[id].order = newPlace;
+    var todoList = getTodoListByOrder();
+    for (var i in todoList) {
+        todoList[i].order = i;
+        if (todoList[i].id === id) {
+            todoCollection[id].order = i;
+        }
+    }
+    TodoDB.set('TodoStore', todoCollection);
 }
 
 /* callbacks of listeners:
@@ -51,11 +91,7 @@ var TodoStore = {
      * components hold stores so if we put create
      * and update here they could use them*/
     getAll: function () {
-        var allTodo = [];
-        for (var i in TodoList) {
-            allTodo.push(TodoList[i]);
-        }
-        return allTodo;
+        return getTodoListByOrder();
     },
 
     addCallback: function (callback) {
@@ -77,26 +113,29 @@ var TodoStore = {
         var action = payload.action;
 
         switch (action.actionType) {
-            case TodoConstants.CREATE:
+            case ActionTypes.CREATE:
                 if (action.text != '') {
                     create(action.text);
                     emitChange();
                 }
                 break;
-            case TodoConstants.UPDATE:
+            case ActionTypes.UPDATE:
                 if (action.text != '') {
-                    update(action.id, action.text, action.status);
+                    update(action.id, action.order, action.text, action.status);
                     emitChange();
                 }
                 break;
-            case TodoConstants.DESTROY:
+            case ActionTypes.DESTROY:
                 destroy(action.id);
+                emitChange();
+                break;
+            case ActionTypes.REORDER:
+                reorder(action.id, action.newPlace);
                 emitChange();
                 break;
         }
     })
 
 };
-
 
 export default TodoStore;

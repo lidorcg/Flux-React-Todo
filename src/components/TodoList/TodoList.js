@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import Todo from '../Todo/Todo'
 import TodoStore from '../../stores/TodoStore'
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
-export default class TodoList extends Component {
+class TodoList extends Component {
 
     constructor(props) {
         super(props);
@@ -38,3 +40,5 @@ export default class TodoList extends Component {
     }
 
 }
+
+export default DragDropContext(HTML5Backend)(TodoList);

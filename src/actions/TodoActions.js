@@ -1,18 +1,19 @@
-import TodoConstants from '../constants/TodoConstants';
+import ActionTypes from '../constants/ActionTypes';
 import Dispatcher from '../dispatcher/MyDispatcher';
 
 export default {
     create: function (text) {
         Dispatcher.handleViewAction({
-            actionType: TodoConstants.CREATE,
+            actionType: ActionTypes.CREATE,
             text: text
         });
     },
 
-    update: function (id, text, status) {
+    update: function (id, order, text, status) {
         Dispatcher.handleViewAction({
-            actionType: TodoConstants.UPDATE,
+            actionType: ActionTypes.UPDATE,
             id: id,
+            order: order,
             text: text,
             status: status
         });
@@ -20,8 +21,16 @@ export default {
 
     destroy: function (id) {
         Dispatcher.handleViewAction({
-            actionType: TodoConstants.DESTROY,
+            actionType: ActionTypes.DESTROY,
             id: id
+        });
+    },
+
+    reorder: function (id, newPlace) {
+        Dispatcher.handleViewAction({
+            actionType: ActionTypes.REORDER,
+            id: id,
+            newPlace: newPlace
         });
     }
 };

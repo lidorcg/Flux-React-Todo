@@ -1,4 +1,4 @@
-import TodoConstants from '../constants/TodoConstants';
+import ActionTypes from '../constants/ActionTypes';
 
 var _callbacks = [];
 
@@ -15,7 +15,7 @@ export default {
 
     handleViewAction: function (action) {
         this.dispatch({
-            source: TodoConstants.VIEW_ACTION,
+            source: ActionTypes.VIEW_ACTION,
             action: action
         });
     }

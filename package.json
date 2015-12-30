@@ -41,8 +41,9 @@
   },
   "dependencies": {
     "icheck": "^1.0.2",
-    "jsonfile": "^2.2.3",
     "react": "^0.14.0",
+    "react-dnd": "^2.0.2",
+    "react-dnd-html5-backend": "^2.0.1",
     "react-dom": "^0.14.0",
     "shortid": "^2.2.4"
   }
