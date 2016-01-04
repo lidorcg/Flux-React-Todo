@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Todo from '../Todo/Todo'
-import TodoStore from '../../stores/NotesStore'
+import TodoStore from '../../stores/TodoStore'
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
