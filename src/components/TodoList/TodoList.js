@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Todo from '../Todo/Todo'
-import TodoStore from '../../stores/TodoStore'
+import TodoStore from '../../stores/NotesStore'
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
@@ -23,15 +23,15 @@ class TodoList extends Component {
         return (
             <table className="table table-hover ">
                 <tbody>
-                {this.state.todoList.map(t => this._renderTodo(t))}
+                {this.state.todoList.map(this._renderTodo)}
                 </tbody>
             </table>
         );
     }
 
-    _renderTodo = (todo) => {
+    _renderTodo = (item, i) => {
         return (
-            <Todo todo={todo}/>
+            <Todo key={i} todo={item}/>
         );
     };
 
