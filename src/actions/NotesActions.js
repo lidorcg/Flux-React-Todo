@@ -4,14 +4,14 @@ import Dispatcher from '../dispatcher/MyDispatcher';
 export default {
     create: function (text) {
         Dispatcher.handleViewAction({
-            actionType: ActionTypes.CREATE,
+            actionType: ActionTypes.CREATE_NOTE,
             text: text
         });
     },
 
     update: function (id, order, text, status) {
         Dispatcher.handleViewAction({
-            actionType: ActionTypes.UPDATE,
+            actionType: ActionTypes.UPDATE_NOTE,
             id: id,
             order: order,
             text: text,
@@ -21,14 +21,14 @@ export default {
 
     destroy: function (id) {
         Dispatcher.handleViewAction({
-            actionType: ActionTypes.DESTROY,
+            actionType: ActionTypes.DESTROY_NOTE,
             id: id
         });
     },
 
     reorder: function (id, newPlace) {
         Dispatcher.handleViewAction({
-            actionType: ActionTypes.REORDER,
+            actionType: ActionTypes.REORDER_NOTES,
             id: id,
             newPlace: newPlace
         });

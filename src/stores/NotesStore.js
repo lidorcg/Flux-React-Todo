@@ -1,20 +1,20 @@
 import shortid from 'shortid';
-import TodoDB from '../db/TodoDB';
+import localStorage from '../local-storage/NotesLocalStorage';
 import ActionTypes from '../constants/ActionTypes';
 import Dispatcher from '../dispatcher/MyDispatcher'
 
 
-var todoCollection = TodoDB.get('TodoStore');
+var notesCollection = localStorage.get('NotesStore');
 
-function getTodoCollectionCount() {
+function getNotesCollectionCount() {
     var count = 0;
-    for (var i in todoCollection) {
+    for (var i in notesCollection) {
         count++;
     }
     return count;
 }
 
-function compareTodo(a, b) {
+function compareNotes(a, b) {
     if (a.order < b.order)
         return -1;
     if (a.order > b.order)
@@ -22,13 +22,13 @@ function compareTodo(a, b) {
     return 0;
 }
 
-function getTodoListByOrder() {
-    var todoList = [];
-    for (var i in todoCollection) {
-        todoList.push(todoCollection[i]);
+function getNotesListByOrder() {
+    var notesList = [];
+    for (var i in notesCollection) {
+        notesList.push(notesCollection[i]);
     }
-    todoList.sort(compareTodo);
-    return todoList;
+    notesList.sort(compareNotes);
+    return notesList;
 }
 
 /* setters and functions that change data are outside the store!
@@ -36,38 +36,38 @@ function getTodoListByOrder() {
  * actions => store => view-controller */
 function create(text) {
     var id = shortid.generate();
-    var order = getTodoCollectionCount();
-    todoCollection[id] = {
+    var order = getNotesCollectionCount();
+    notesCollection[id] = {
         id: id,
         order: order,
         text: text,
         status: false
     };
-    TodoDB.set('TodoStore', todoCollection);
+    localStorage.set('NotesStore', notesCollection);
 }
 
 function update(id, order, text, status) {
-    todoCollection[id].order = order;
-    todoCollection[id].text = text;
-    todoCollection[id].status = status;
-    TodoDB.set('TodoStore', todoCollection);
+    notesCollection[id].order = order;
+    notesCollection[id].text = text;
+    notesCollection[id].status = status;
+    localStorage.set('NotesStore', notesCollection);
 }
 
 function destroy(id) {
-    delete todoCollection[id];
-    TodoDB.set('TodoStore', todoCollection);
+    delete notesCollection[id];
+    localStorage.set('NotesStore', notesCollection);
 }
 
 function reorder(id, newPlace) {
-    todoCollection[id].order = newPlace;
-    var todoList = getTodoListByOrder();
-    for (var i in todoList) {
-        todoList[i].order = i;
-        if (todoList[i].id === id) {
-            todoCollection[id].order = i;
+    notesCollection[id].order = newPlace;
+    var notesList = getNotesListByOrder();
+    for (var i in notesList) {
+        notesList[i].order = i;
+        if (notesList[i].id === id) {
+            notesCollection[id].order = i;
         }
     }
-    TodoDB.set('TodoStore', todoCollection);
+    localStorage.set('NotesStore', notesCollection);
 }
 
 /* callbacks of listeners:
@@ -79,7 +79,7 @@ function emitChange() {
     _callbacks.forEach(c => c());
 }
 
-var TodoStore = {
+var NotesStore = {
 
     /***************************/
     /* Components interactions */
@@ -91,7 +91,7 @@ var TodoStore = {
      * components hold stores so if we put create
      * and update here they could use them*/
     getAll: function () {
-        return getTodoListByOrder();
+        return getNotesListByOrder();
     },
 
     addCallback: function (callback) {
@@ -113,23 +113,23 @@ var TodoStore = {
         var action = payload.action;
 
         switch (action.actionType) {
-            case ActionTypes.CREATE:
+            case ActionTypes.CREATE_NOTE:
                 if (action.text != '') {
                     create(action.text);
                     emitChange();
                 }
                 break;
-            case ActionTypes.UPDATE:
+            case ActionTypes.UPDATE_NOTE:
                 if (action.text != '') {
                     update(action.id, action.order, action.text, action.status);
                     emitChange();
                 }
                 break;
-            case ActionTypes.DESTROY:
+            case ActionTypes.DESTROY_NOTE:
                 destroy(action.id);
                 emitChange();
                 break;
-            case ActionTypes.REORDER:
+            case ActionTypes.REORDER_NOTES:
                 reorder(action.id, action.newPlace);
                 emitChange();
                 break;
@@ -138,4 +138,4 @@ var TodoStore = {
 
 };
 
-export default TodoStore;
+export default NotesStore;

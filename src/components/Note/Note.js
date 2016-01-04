@@ -1,22 +1,22 @@
 import React, { Component, PropTypes } from 'react'
-import TodoInput from './TodoInput'
-import TodoCheckbox from './TodoCheckbox'
+import Input from './Input'
+import Checkbox from './Checkbox'
 
-import TodoActions from '../../actions/TodoActions'
+import NotesActions from '../../actions/NotesActions'
 
 import ItemTypes from '../../constants/ItemTypes'
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/function/flow';
 
 
-const todoSource = {
+const noteSource = {
     beginDrag(props) {
         return {
-            todo: props.todo
+            note: props.note
         };
     },
     isDragging(props, monitor) {
-        return props.todo.id === monitor.getItem().todo.id;
+        return props.note.id === monitor.getItem().note.id;
     }
 };
 
@@ -27,25 +27,25 @@ function collectSource(connect, monitor) {
     }
 }
 
-const todoTarget = {
+const noteTarget = {
     hover(targetProps, monitor) {
-        const targetTodo = targetProps.todo;
-        const sourceTodo = monitor.getItem().todo;
+        const target = targetProps.note;
+        const source = monitor.getItem().note;
 
-        if (targetTodo.id === sourceTodo.id) {
+        if (target.id === source.id) {
             return;
         }
 
         var newPlace;
 
-        if (sourceTodo.order < targetTodo.order) {
-            newPlace = targetTodo.order + 0.5;
+        if (source.order < target.order) {
+            newPlace = target.order + 0.5;
         }
 
-        if (sourceTodo.order > targetTodo.order) {
-            newPlace = targetTodo.order - 0.5;
+        if (source.order > target.order) {
+            newPlace = target.order - 0.5;
         }
-        TodoActions.reorder(sourceTodo.id, newPlace);
+        NotesActions.reorder(source.id, newPlace);
     }
 };
 
@@ -56,9 +56,9 @@ function collectTarget(connect) {
 }
 
 
-class Todo extends Component {
+class Note extends Component {
     static propTypes = {
-        todo: PropTypes.object.isRequired,
+        note: PropTypes.object.isRequired,
         connectDragSource: PropTypes.func.isRequired,
         connectDropTarget: PropTypes.func.isRequired,
         isDragging: PropTypes.bool.isRequired
@@ -69,8 +69,8 @@ class Todo extends Component {
     render() {
         const {connectDragSource, connectDropTarget, isDragging} = this.props;
         return connectDragSource(connectDropTarget(
-            <tr className="todo-item panel" style={{opacity: isDragging ? 0 : 1}}>
-                <td><TodoCheckbox onStatusChange={this._onStatusUpdate} status={this.props.todo.status}/></td>
+            <tr className="note-item panel" style={{opacity: isDragging ? 0 : 1}}>
+                <td><Checkbox onStatusChange={this._onStatusUpdate} status={this.props.note.status}/></td>
                 {this.state.editing ? this._renderInput() : this._renderText()}
                 <td>
                     <span onClick={this._onDestroy} className="destroy-btn glyphicon glyphicon-remove"/>
@@ -81,16 +81,16 @@ class Todo extends Component {
 
     _renderText = () => {
         return (
-            <td className="todo-item-text" onClick={this._onClick}>{this.props.todo.text}</td>
+            <td className="note-item-text" onClick={this._onClick}>{this.props.note.text}</td>
         );
     };
 
     _renderInput = () => {
         return (
-            <td className="td-input">
-                <TodoInput val={this.props.todo.text}
-                           onBlur={this._onInputBlur}
-                           onSave={this._onTextUpdate}/>
+            <td>
+                <Input val={this.props.note.text}
+                       onBlur={this._onInputBlur}
+                       onSave={this._onTextUpdate}/>
             </td>
         );
     };
@@ -104,22 +104,22 @@ class Todo extends Component {
     };
 
     _onStatusUpdate = (e) => {
-        var todo = this.props.todo;
-        TodoActions.update(todo.id, todo.order, todo.text, e.target.checked);
+        var note = this.props.note;
+        NotesActions.update(note.id, note.order, note.text, e.target.checked);
     };
 
     _onTextUpdate = (val) => {
-        var todo = this.props.todo;
-        TodoActions.update(todo.id, todo.order, val, todo.status);
+        var note = this.props.note;
+        NotesActions.update(note.id, note.order, val, note.status);
         this.setState({editing: false});
     };
 
     _onDestroy = () => {
-        TodoActions.destroy(this.props.todo.id);
+        NotesActions.destroy(this.props.note.id);
     }
 }
 
 export default flow(
-    DragSource(ItemTypes.TODO, todoSource, collectSource),
-    DropTarget(ItemTypes.TODO, todoTarget, collectTarget)
-)(Todo);
+    DragSource(ItemTypes.NOTE, noteSource, collectSource),
+    DropTarget(ItemTypes.NOTE, noteTarget, collectTarget)
+)(Note);

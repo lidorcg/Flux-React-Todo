@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 
-export default class TodoCheckbox extends Component {
+export default class Checkbox extends Component {
 
     static propTypes = {
         status: React.PropTypes.bool.isRequired,

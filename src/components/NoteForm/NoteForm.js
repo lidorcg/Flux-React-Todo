@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import TodoActions from '../../actions/TodoActions'
+import NotesActions from '../../actions/NotesActions'
 
-export default class TodoForm extends Component {
+export default class NoteForm extends Component {
 
     constructor(props) {
         super(props);
@@ -10,7 +10,7 @@ export default class TodoForm extends Component {
 
     render = () => {
         return (
-            <div className="todo-form">
+            <div className="note-form">
                 <input className="form-control input-lg"
                        type="text"
                        placeholder="What's next?"
@@ -23,7 +23,7 @@ export default class TodoForm extends Component {
     };
 
     _onSave = (val) => {
-        TodoActions.create(val);
+        NotesActions.create(val);
     };
 
     _onChange = (e) => {

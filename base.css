@@ -2,20 +2,20 @@ body {
     background-color: #fafafa;
 }
 
-.todo-box {
+.lane {
     width: 400px;
     margin: 10px;
 }
 
-.todo-form {
+.note-form {
     padding: 10px;
 }
 
-.todo-item {
+.note-item {
     height: 52px;
 }
 
-table > tbody > tr.todo-item > td {
+table > tbody > tr.note-item > td {
     vertical-align: middle
 }
 
@@ -36,11 +36,7 @@ tr td:last-child {
     width: 32px;
 }
 
-.todo-item-text {
-    padding-left: 20px;
-}
-
-.table > tbody > tr.todo-item > td.todo-item-text {
+.table > tbody > tr.note-item > td.note-item-text {
     padding-left: 20px;
 }
 

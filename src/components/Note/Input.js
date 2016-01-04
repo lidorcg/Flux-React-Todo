@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class TodoInput extends Component {
+export default class Input extends Component {
 
     constructor(props) {
         super(props);

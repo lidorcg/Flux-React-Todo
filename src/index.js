@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoApp from './components/TodoApp/TodoApp';
+import NotesApp from './components/NotesApp/NotesApp'
 
-ReactDOM.render(<TodoApp />, document.getElementById('root'));
+ReactDOM.render(<NotesApp />, document.getElementById('root'));
