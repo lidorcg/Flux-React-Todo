@@ -1,33 +1,14 @@
-import shortid from 'shortid';
-import localStorage from '../local-storage/NotesLocalStorage';
-import ActionTypes from '../constants/ActionTypes';
+import shortid from 'shortid'
+import utils from '../utils/StoresUtils'
+import localStorage from '../utils/LocalStorage'
+import ActionTypes from '../constants/ActionTypes'
 import Dispatcher from '../dispatcher/MyDispatcher'
-
 
 var notesCollection = localStorage.get('NotesStore');
 
-function getNotesCollectionCount() {
-    var count = 0;
-    for (var i in notesCollection) {
-        count++;
-    }
-    return count;
-}
-
-function compareNotes(a, b) {
-    if (a.order < b.order)
-        return -1;
-    if (a.order > b.order)
-        return 1;
-    return 0;
-}
-
 function getNotesListByOrder() {
-    var notesList = [];
-    for (var i in notesCollection) {
-        notesList.push(notesCollection[i]);
-    }
-    notesList.sort(compareNotes);
+    var notesList = utils.collectionToList(notesCollection);
+    notesList.sort(utils.compareByOrder);
     return notesList;
 }
 
@@ -36,7 +17,7 @@ function getNotesListByOrder() {
  * actions => store => view-controller */
 function create(text) {
     var id = shortid.generate();
-    var order = getNotesCollectionCount();
+    var order = utils.getSize(notesCollection);
     notesCollection[id] = {
         id: id,
         order: order,
