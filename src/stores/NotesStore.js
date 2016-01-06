@@ -5,6 +5,15 @@ import ActionTypes from '../constants/ActionTypes'
 import Dispatcher from '../dispatcher/MyDispatcher'
 
 var notesCollection = localStorage.get('NotesStore');
+if(notesCollection === null) {
+    notesCollection = {};
+}
+
+function getNotesListByLane(laneId) {
+    var notesList = utils.collectionToList(notesCollection);
+    notesList = notesList.filter((item) => { return item.laneId === laneId });
+    return notesList;
+}
 
 function getNotesListByOrder() {
     var notesList = utils.collectionToList(notesCollection);
@@ -15,11 +24,12 @@ function getNotesListByOrder() {
 /* setters and functions that change data are outside the store!
  * we want to force unidirectional data flow:
  * actions => store => view-controller */
-function create(text) {
+function create(laneId, text) {
     var id = shortid.generate();
     var order = utils.getSize(notesCollection);
     notesCollection[id] = {
         id: id,
+        laneId: laneId,
         order: order,
         text: text,
         status: false
@@ -27,8 +37,9 @@ function create(text) {
     localStorage.set('NotesStore', notesCollection);
 }
 
-function update(id, order, text, status) {
+function update(id, laneId, order, text, status) {
     notesCollection[id].order = order;
+    notesCollection[id].laneId = laneId;
     notesCollection[id].text = text;
     notesCollection[id].status = status;
     localStorage.set('NotesStore', notesCollection);
@@ -75,6 +86,10 @@ var NotesStore = {
         return getNotesListByOrder();
     },
 
+    getByLane: function (laneId) {
+        return getNotesListByLane(laneId);
+    },
+
     addCallback: function (callback) {
         _callbacks.push(callback);
     },
@@ -96,13 +111,13 @@ var NotesStore = {
         switch (action.actionType) {
             case ActionTypes.CREATE_NOTE:
                 if (action.text != '') {
-                    create(action.text);
+                    create(action.laneId, action.text);
                     emitChange();
                 }
                 break;
             case ActionTypes.UPDATE_NOTE:
                 if (action.text != '') {
-                    update(action.id, action.order, action.text, action.status);
+                    update(action.id, action.laneId, action.order, action.text, action.status);
                     emitChange();
                 }
                 break;

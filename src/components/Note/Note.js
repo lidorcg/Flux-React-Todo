@@ -58,6 +58,7 @@ function collectTarget(connect) {
 
 class Note extends Component {
     static propTypes = {
+        laneId: PropTypes.string.isRequired,
         note: PropTypes.object.isRequired,
         connectDragSource: PropTypes.func.isRequired,
         connectDropTarget: PropTypes.func.isRequired,
@@ -105,12 +106,14 @@ class Note extends Component {
 
     _onStatusUpdate = (e) => {
         var note = this.props.note;
-        NotesActions.update(note.id, note.order, note.text, e.target.checked);
+        var laneId = this.props.laneId;
+        NotesActions.update(note.id, laneId, note.order, note.text, e.target.checked);
     };
 
     _onTextUpdate = (val) => {
         var note = this.props.note;
-        NotesActions.update(note.id, note.order, val, note.status);
+        var laneId = this.props.laneId;
+        NotesActions.update(note.id, laneId, note.order, val, note.status);
         this.setState({editing: false});
     };
 

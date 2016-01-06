@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import NotesActions from '../../actions/NotesActions'
 
 export default class NoteForm extends Component {
@@ -7,6 +7,10 @@ export default class NoteForm extends Component {
         super(props);
         this.state = {val: ''}
     }
+
+    static propTypes = {
+        laneId: PropTypes.string.isRequired
+    };
 
     render = () => {
         return (
@@ -23,7 +27,7 @@ export default class NoteForm extends Component {
     };
 
     _onSave = (val) => {
-        NotesActions.create(val);
+        NotesActions.create(this.props.laneId, val);
     };
 
     _onChange = (e) => {

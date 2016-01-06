@@ -1,15 +1,17 @@
-import React, { Component } from 'react'
-import Note from '../Note/Note'
+import React, { Component, PropTypes } from 'react'
 import NotesStore from '../../stores/NotesStore'
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import Note from '../Note/Note'
 
-class NotesList extends Component {
+export default class NotesList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {notesList: NotesStore.getAll()};
+        this.state = {notesList: NotesStore.getByLane(this.props.laneId)};
     }
+
+    static propTypes = {
+        laneId: PropTypes.string.isRequired
+    };
 
     componentDidMount() {
         NotesStore.addCallback(this._updateNotesList);
@@ -31,14 +33,12 @@ class NotesList extends Component {
 
     _renderNote = (item, i) => {
         return (
-            <Note key={i} note={item}/>
+            <Note key={i} laneId={this.props.laneId} note={item}/>
         );
     };
 
     _updateNotesList = () => {
-        this.setState({notesList: NotesStore.getAll()});
+        this.setState({notesList: NotesStore.getByLane(this.props.laneId)});
     }
 
 }
-
-export default DragDropContext(HTML5Backend)(NotesList);

@@ -6,6 +6,9 @@ import Dispatcher from '../dispatcher/MyDispatcher'
 
 
 var lanesCollection = localStorage.get('LanesStore');
+if(lanesCollection === null) {
+    lanesCollection = {};
+}
 
 function getLanesListByOrder() {
     var lanesList = utils.collectionToList(lanesCollection);
@@ -111,3 +114,5 @@ var LaneStore = {
         }
     })
 };
+
+export default LaneStore;

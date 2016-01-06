@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import Lane from '../Lane/Lane';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import LanesList from '../LanesList/LanesList';
 
-export default class NotesApp extends Component {
+class NotesApp extends Component {
     render = () => {
         return (
-            <Lane/>
+            <div className="container">
+                <LanesList />
+            </div>
         );
     }
 }
+
+export default DragDropContext(HTML5Backend)(NotesApp);
