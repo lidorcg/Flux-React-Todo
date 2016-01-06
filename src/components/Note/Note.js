@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Input from './Input'
+import Editable from '../Editable/Editable'
 import Checkbox from './Checkbox'
 
 import NotesActions from '../../actions/NotesActions'
@@ -55,7 +55,6 @@ function collectTarget(connect) {
     }
 }
 
-
 class Note extends Component {
     static propTypes = {
         laneId: PropTypes.string.isRequired,
@@ -65,44 +64,25 @@ class Note extends Component {
         isDragging: PropTypes.bool.isRequired
     };
 
-    state = {editing: false};
-
     render() {
         const {connectDragSource, connectDropTarget, isDragging} = this.props;
         return connectDragSource(connectDropTarget(
             <tr className="note-item panel" style={{opacity: isDragging ? 0 : 1}}>
-                <td><Checkbox onStatusChange={this._onStatusUpdate} status={this.props.note.status}/></td>
-                {this.state.editing ? this._renderInput() : this._renderText()}
-                <td>
-                    <span onClick={this._onDestroy} className="destroy-btn glyphicon glyphicon-remove"/>
+                <td className="note-item-checkbox">
+                    <Checkbox onStatusChange={this._onStatusUpdate}
+                              status={this.props.note.status}/>
+                </td>
+                <td className="note-item-text">
+                    <Editable val={this.props.note.text}
+                              onSave={this._onTextUpdate} />
+                </td>
+                <td className="note-item-delete">
+                    <span onClick={this._onDestroy}
+                          className="destroy-btn glyphicon glyphicon-remove"/>
                 </td>
             </tr>
         ));
     }
-
-    _renderText = () => {
-        return (
-            <td className="note-item-text" onClick={this._onClick}>{this.props.note.text}</td>
-        );
-    };
-
-    _renderInput = () => {
-        return (
-            <td>
-                <Input val={this.props.note.text}
-                       onBlur={this._onInputBlur}
-                       onSave={this._onTextUpdate}/>
-            </td>
-        );
-    };
-
-    _onClick = () => {
-        this.setState({editing: true});
-    };
-
-    _onInputBlur = () => {
-        this.setState({editing: false});
-    };
 
     _onStatusUpdate = (e) => {
         var note = this.props.note;
