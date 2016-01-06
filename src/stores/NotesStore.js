@@ -12,13 +12,16 @@ if(notesCollection === null) {
 function getNotesListByLane(laneId) {
     var notesList = utils.collectionToList(notesCollection);
     notesList = notesList.filter((item) => { return item.laneId === laneId });
+    notesList.sort(utils.compareByOrder);
     return notesList;
 }
 
-function getNotesListByOrder() {
-    var notesList = utils.collectionToList(notesCollection);
-    notesList.sort(utils.compareByOrder);
-    return notesList;
+function reorderLane(laneId) {
+    var notesList = getNotesListByLane(laneId);
+    for (var i in notesList) {
+        notesList[i].order = i;
+        notesCollection[notesList[i].id].order = i;
+    }
 }
 
 /* setters and functions that change data are outside the store!
@@ -51,14 +54,20 @@ function destroy(id) {
 }
 
 function reorder(id, newPlace) {
-    notesCollection[id].order = newPlace;
-    var notesList = getNotesListByOrder();
-    for (var i in notesList) {
-        notesList[i].order = i;
-        if (notesList[i].id === id) {
-            notesCollection[id].order = i;
-        }
+    // set everything
+    var newLane = newPlace.laneId;
+    var oldLane = notesCollection[id].laneId;
+
+    // move note to new place
+    notesCollection[id].laneId = newLane;
+    notesCollection[id].order = newPlace.order;
+
+    // fix orders in lanes
+    reorderLane(id, oldLane);
+    if (oldLane !== newLane) {
+        reorderLane(newLane);
     }
+
     localStorage.set('NotesStore', notesCollection);
 }
 

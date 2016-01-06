@@ -36,16 +36,16 @@ const noteTarget = {
             return;
         }
 
-        var newPlace;
+        var newOrder;
 
         if (source.order < target.order) {
-            newPlace = target.order + 0.5;
+            newOrder = target.order + 0.5;
         }
 
         if (source.order > target.order) {
-            newPlace = target.order - 0.5;
+            newOrder = target.order - 0.5;
         }
-        NotesActions.reorder(source.id, newPlace);
+        NotesActions.reorder(source.id, {laneId: target.laneId, order:newOrder});
     }
 };
 
