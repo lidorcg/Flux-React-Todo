@@ -22,6 +22,7 @@ function reorderLane(laneId) {
         notesList[i].order = i;
         notesCollection[notesList[i].id].order = i;
     }
+    console.log(notesList)
 }
 
 /* setters and functions that change data are outside the store!
@@ -29,7 +30,7 @@ function reorderLane(laneId) {
  * actions => store => view-controller */
 function create(laneId, text) {
     var id = shortid.generate();
-    var order = utils.getSize(notesCollection);
+    var order = getNotesListByLane(laneId).length;
     notesCollection[id] = {
         id: id,
         laneId: laneId,
@@ -63,7 +64,7 @@ function reorder(id, newPlace) {
     notesCollection[id].order = newPlace.order;
 
     // fix orders in lanes
-    reorderLane(id, oldLane);
+    reorderLane(oldLane);
     if (oldLane !== newLane) {
         reorderLane(newLane);
     }
