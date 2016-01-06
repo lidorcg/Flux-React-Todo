@@ -34,7 +34,7 @@ export default class LanesList extends Component {
 
     _renderLane = (item, i) => {
         return (
-            <div key={i} className="col-md-5 lanes-list">
+            <div key={i} className="col-md-4 lanes-list">
                 <Lane lane={item}/>
             </div>
         );
