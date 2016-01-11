@@ -13,7 +13,7 @@ export default {
             actionType: ActionTypes.UPDATE_LANE,
             id: id,
             order: order,
-            text: name
+            name: name
         });
     },
 
