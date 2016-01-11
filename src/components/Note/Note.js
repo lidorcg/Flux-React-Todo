@@ -45,7 +45,7 @@ const noteTarget = {
         if (source.order > target.order) {
             newOrder = target.order - 0.5;
         }
-        NotesActions.reorder(source.id, {laneId: target.laneId, order:newOrder});
+        NotesActions.reorder(source.id, {laneId: target.laneId, order: newOrder});
     }
 };
 
@@ -74,7 +74,7 @@ class Note extends Component {
                 </td>
                 <td className="note-item-text">
                     <Editable val={this.props.note.text}
-                              onSave={this._onTextUpdate} />
+                              onSave={this._onTextUpdate}/>
                 </td>
                 <td className="note-item-delete">
                     <span onClick={this._onDestroy}
@@ -90,10 +90,10 @@ class Note extends Component {
         NotesActions.update(note.id, laneId, note.order, note.text, e.target.checked);
     };
 
-    _onTextUpdate = (val) => {
+    _onTextUpdate = (text) => {
         var note = this.props.note;
         var laneId = this.props.laneId;
-        NotesActions.update(note.id, laneId, note.order, val, note.status);
+        NotesActions.update(note.id, laneId, note.order, text, note.status);
         this.setState({editing: false});
     };
 
