@@ -22,7 +22,6 @@ function reorderLane(laneId) {
         notesList[i].order = i;
         notesCollection[notesList[i].id].order = i;
     }
-    console.log(notesList)
 }
 
 /* setters and functions that change data are outside the store!
