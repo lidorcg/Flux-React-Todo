@@ -23,7 +23,7 @@ export default class Editable extends Component {
     };
 
     _renderInput = () => {
-        return (<input className="form-control"
+        return (<input className="form-control input-sm"
                        type="text"
                        autoFocus={true}
                        value={this.state.val}

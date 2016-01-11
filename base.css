@@ -10,7 +10,7 @@ body {
 }
 
 .note-item {
-    height: 52px;
+    height: 48px;
 }
 
 table > tbody > tr.note-item > td {
@@ -30,7 +30,7 @@ table {
 
 .table > tbody > tr.note-item > td.note-item-text {
     padding-left: 10px;
-    font-size: medium;
+    font-size: small;
 }
 
 .table > tbody > tr.note-item > td.note-item-delete {
