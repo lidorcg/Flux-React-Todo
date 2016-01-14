@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import Editable from '../Editable/Editable'
-import Checkbox from './Checkbox'
 
 import NotesActions from '../../actions/NotesActions'
 
@@ -69,8 +68,9 @@ class Note extends Component {
         return connectDragSource(connectDropTarget(
             <tr className="note-item panel" style={{opacity: isDragging ? 0 : 1}}>
                 <td className="note-item-checkbox">
-                    <Checkbox onStatusChange={this._onStatusUpdate}
-                              status={this.props.note.status}/>
+                    <span onClick={this._onStatusUpdate}
+                          className="check-btn glyphicon glyphicon-ok"
+                          style={{color: this.props.note.status ? '#228B22' : '#FFFFFF'}}/>
                 </td>
                 <td className="note-item-text">
                     <Editable val={this.props.note.text}
@@ -87,7 +87,7 @@ class Note extends Component {
     _onStatusUpdate = (e) => {
         var note = this.props.note;
         var laneId = this.props.laneId;
-        NotesActions.update(note.id, laneId, note.order, note.text, e.target.checked);
+        NotesActions.update(note.id, laneId, note.order, note.text, !note.status);
     };
 
     _onTextUpdate = (text) => {

@@ -22,6 +22,7 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+
 .table > tbody > tr.note-item > td.note-item-checkbox {
     overflow: hidden;
     white-space: nowrap;
@@ -29,7 +30,6 @@ table {
 }
 
 .table > tbody > tr.note-item > td.note-item-text {
-    padding-left: 10px;
     font-size: small;
 }
 
@@ -39,11 +39,11 @@ table {
     width: 32px;
 }
 
-.destroy-btn{
+.destroy-btn, .check-btn {
     cursor: pointer;
     color: white;
 }
 
-.destroy-btn:hover{
-    color: #F22613;
+.destroy-btn:hover {
+    color: #DA4453;
 }

@@ -18,7 +18,7 @@ export default class Editable extends Component {
 
     _renderText = () => {
         return (
-            <div onClick={this._onClick}>{this.props.val}</div>
+            <div style={{paddingLeft: 10}} onClick={this._onClick}>{this.props.val}</div>
         );
     };
 
