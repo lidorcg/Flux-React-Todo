@@ -27,7 +27,11 @@ export default class LanesList extends Component {
                             onClick={this._onCreate}>New Lane
                     </button>
                 </div>
-                {this.state.lanesList.map(this._renderLane)}
+                <div className="col-md-10">
+                    <div className="row">
+                        {this.state.lanesList.map(this._renderLane)}
+                    </div>
+                </div>
             </div>
         );
     }
