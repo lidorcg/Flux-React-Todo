@@ -16,9 +16,11 @@ export default {
     },
 
     compareByOrder: function (a, b) {
-        if (a.order < b.order)
+        const aOrder = Number(a.order);
+        const bOrder = Number(b.order);
+        if (aOrder < bOrder)
             return -1;
-        if (a.order > b.order)
+        if (aOrder > bOrder)
             return 1;
         return 0;
     }

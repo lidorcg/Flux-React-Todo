@@ -37,13 +37,16 @@ const noteTarget = {
 
         var newOrder;
 
-        if (source.order < target.order) {
-            newOrder = target.order + 0.5;
+        const sourceOrder = Number(source.order);
+        const targetOrder = Number(target.order);
+
+        if (sourceOrder < targetOrder) {
+            newOrder = targetOrder + 0.5;
+        }
+        if (sourceOrder > targetOrder) {
+            newOrder = targetOrder - 0.5;
         }
 
-        if (source.order > target.order) {
-            newOrder = target.order - 0.5;
-        }
         NotesActions.reorder(source.id, {laneId: target.laneId, order: newOrder});
     }
 };
