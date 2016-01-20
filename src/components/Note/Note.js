@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react'
-import Editable from '../Editable/Editable'
+
+import { DragSource, DropTarget } from 'react-dnd';
+import flow from 'lodash/function/flow';
+import ItemTypes from '../../constants/ItemTypes'
 
 import NotesActions from '../../actions/NotesActions'
 
-import ItemTypes from '../../constants/ItemTypes'
-import { DragSource, DropTarget } from 'react-dnd';
-import flow from 'lodash/function/flow';
+import Editable from '../Editable/Editable'
+
 
 
 const noteSource = {
