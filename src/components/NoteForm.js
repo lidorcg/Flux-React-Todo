@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import NotesActions from '../../actions/NotesActions'
+import NotesActions from '../actions/NotesActions'
 
 export default class NoteForm extends Component {
 

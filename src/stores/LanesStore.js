@@ -16,6 +16,14 @@ function getLanesListByOrder() {
     return lanesList;
 }
 
+function reorderLanes() {
+    var lanesList = getLanesListByOrder();
+    for (var i in lanesList) {
+        lanesList[i].order = i;
+        lanesCollection[lanesList[i].id].order = i;
+    }
+}
+
 /************************/
 /* actions on the store */
 /************************/
@@ -43,14 +51,12 @@ function destroy(id) {
 }
 
 function reorder(id, newPlace) {
+    // move note to new place
     lanesCollection[id].order = newPlace;
-    var lanesList = getLanesListByOrder();
-    for (var i in lanesList) {
-        lanesList[i].order = i;
-        if (lanesList[i].id === id) {
-            lanesCollection[id].order = i;
-        }
-    }
+
+    // fix orders in lanes
+    reorderLanes();
+
     localStorage.set('LanesStore', lanesCollection);
 }
 

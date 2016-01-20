@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import NotesStore from '../../stores/NotesStore'
-import Note from '../Note/Note'
+import NotesStore from '../stores/NotesStore'
+import Note from './Note'
 
 export default class NotesList extends Component {
-
     constructor(props) {
         super(props);
         this.state = {notesList: NotesStore.getByLane(this.props.laneId)};
@@ -38,6 +37,7 @@ export default class NotesList extends Component {
     };
 
     _updateNotesList = () => {
+        console.log("Update notes list!");
         this.setState({notesList: NotesStore.getByLane(this.props.laneId)});
     }
 
