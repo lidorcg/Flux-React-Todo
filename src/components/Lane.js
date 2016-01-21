@@ -33,24 +33,10 @@ const laneTarget = {
     hover(targetProps, monitor) {
         const target = targetProps.lane;
         const source = monitor.getItem().lane;
-
         if (target.id === source.id) {
             return;
         }
-
-        var newOrder;
-
-        const sourceOrder = Number(source.order);
-        const targetOrder = Number(target.order);
-
-        if (sourceOrder < targetOrder) {
-            newOrder = targetOrder + 0.5;
-        }
-        if (sourceOrder > targetOrder) {
-            newOrder = targetOrder - 0.5;
-        }
-
-        LanesActions.reorder(source.id, newOrder);
+        LanesActions.reorder(source.id, target.id);
     }
 };
 

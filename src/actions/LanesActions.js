@@ -24,11 +24,11 @@ export default {
         });
     },
 
-    reorder: function (id, newPlace) {
+    reorder: function (sourceId, targetId) {
         Dispatcher.handleViewAction({
             actionType: ActionTypes.REORDER_LANES,
-            id: id,
-            newPlace: newPlace
+            sourceId: sourceId,
+            targetId: targetId
         });
     }
 };
