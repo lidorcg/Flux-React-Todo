@@ -37,7 +37,6 @@ export default class NotesList extends Component {
     };
 
     _updateNotesList = () => {
-        console.log("Update notes list!");
         this.setState({notesList: NotesStore.getByLane(this.props.laneId)});
     }
 
